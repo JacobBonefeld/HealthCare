@@ -5,12 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import javafx.scene.image.ImageView;
 
 
 public class Controller {
 @FXML
-TextField weekNo;
+    TextField weekNo;
 @FXML
     TextField hoursWorkedOut;
 @FXML
@@ -23,13 +23,25 @@ TextField weekNo;
     Button queryDataButton;
 @FXML
     TextArea textAreaScrollPane;
+@FXML
+    ImageView thumbsUp;
+@FXML
+    ImageView thumbsDown;
 
+    /**
+     * gets exercises from user input, and places them in database
+     */
     public void getExcercises(){
         int week =Integer.parseInt(weekNo.getText());
         double hoursExercised = Double.parseDouble(hoursWorkedOut.getText());
         DB.insertSQL("INSERT INTO tblHealthRecord (fldWeek, fldExercisedHours)VALUES("+week+","+hoursExercised+")");
         displayExcercises();
+        displayAverageExerciseHours();
     }
+
+    /**
+     * Displays exercise history
+     */
     public void displayExcercises(){
         DB.selectSQL("SELECT fldRecordId FROM tblHealthRecord");
         do{
@@ -66,10 +78,21 @@ TextField weekNo;
 
     }
 
+    /**
+     * displays average exerciseHours and state of thumbup/down
+     */
     public void displayAverageExerciseHours(){
-
+   DB.selectSQL("SELECT AVG(fldExercisedHours) FROM tblHealthRecord");
+   String avg = DB.getData();
+    averageDisplay.setText(avg);
+    if (Double.parseDouble(avg)>3){
+        thumbsDown.setVisible(false);
+        thumbsUp.setVisible(true);
     }
-    public void setGoodOrBadEffort(){
-
+    else {
+        thumbsUp.setVisible(false);
+        thumbsDown.setVisible(true);
     }
+    }
+
 }

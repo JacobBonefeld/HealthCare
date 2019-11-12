@@ -72,12 +72,12 @@
                         </ScrollPane>
                         <TextField fx:id="averageDisplay" layoutX="223.0" layoutY="441.0" prefHeight="70.0" prefWidth="116.0" />
                         <Label layoutX="142.0" layoutY="465.0" text="Average" textFill="WHITE" />
-                        <ImageView fitHeight="71.0" fitWidth="105.0" layoutX="385.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="thumbsUp" fitHeight="71.0" fitWidth="105.0" layoutX="385.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
                               <Image url="@thumbsup.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="94.0" fitWidth="100.0" layoutX="473.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="thumbsDown" fitHeight="94.0" fitWidth="100.0" layoutX="473.0" layoutY="445.0" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
                               <Image url="@Thumbs-Down-Transparent-Background.png" />
                            </image>
