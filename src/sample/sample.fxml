@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -55,21 +56,21 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button blendMode="LIGHTEN" layoutX="294.0" layoutY="6.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="271.0" text="Insert Data" />
-                        <TextField layoutX="160.0" layoutY="12.0" prefHeight="30.0" prefWidth="111.0" />
-                        <TextField layoutX="159.0" layoutY="54.0" prefHeight="36.0" prefWidth="112.0" />
+                        <Button fx:id="insertDataButton" blendMode="LIGHTEN" layoutX="294.0" layoutY="6.0" mnemonicParsing="false" onAction="#getExcercises" prefHeight="84.0" prefWidth="125.0" text="Insert Data" />
+                        <TextField fx:id="weekNo" layoutX="160.0" layoutY="12.0" prefHeight="30.0" prefWidth="111.0" />
+                        <TextField fx:id="hoursWorkedOut" layoutX="159.0" layoutY="54.0" prefHeight="36.0" prefWidth="112.0" />
                         <Label layoutX="29.0" layoutY="19.0" text="Week Number" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Label>
                         <Label layoutX="29.0" layoutY="62.0" text="Hours of workout" textFill="WHITE" />
-                        <ScrollPane layoutX="29.0" layoutY="106.0" prefHeight="312.0" prefWidth="536.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                          </content>
+                        <ScrollPane fx:id="scrollPane" layoutX="29.0" layoutY="106.0" prefHeight="312.0" prefWidth="536.0">
+                           <content>
+                              <TextArea fx:id="textAreaScrollPane" prefHeight="310.0" prefWidth="534.0" />
+                           </content>
                         </ScrollPane>
-                        <TextField layoutX="223.0" layoutY="441.0" prefHeight="70.0" prefWidth="116.0" />
+                        <TextField fx:id="averageDisplay" layoutX="223.0" layoutY="441.0" prefHeight="70.0" prefWidth="116.0" />
                         <Label layoutX="142.0" layoutY="465.0" text="Average" textFill="WHITE" />
                         <ImageView fitHeight="71.0" fitWidth="105.0" layoutX="385.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -81,6 +82,7 @@
                               <Image url="@Thumbs-Down-Transparent-Background.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="queryDataButton" blendMode="LIGHTEN" layoutX="429.0" layoutY="5.0" mnemonicParsing="false" onAction="#displayExcercises" prefHeight="84.0" prefWidth="125.0" text="Query Data" />
                      </children>
                   </AnchorPane>
                </content>
