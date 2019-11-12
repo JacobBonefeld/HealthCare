@@ -1,0 +1,38 @@
+.button {
+    -fx-background-color: #85929E  ;
+    -fx-text-fill: white;
+    -fx-border-width: 4;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+}
+
+.tab-pane{
+    -fx-background-color: #5D6D7E;
+    -fx-border-style: solid;
+    -fx-border-width: 3;
+    -fx-border-color: black;
+}
+
+.tab{
+    -fx-background-color: #85929E ;
+    -fx-font-size:20;
+    -fx-font-weight: bold;
+    -fx-border-color: black;
+    -fx-padding: 8;
+    -fx-text-fill: green;
+    -fx-pref-width: 275;
+}
+
+.tab-header-background{
+    -fx-opacity: 0;
+}
+.text-field{
+    -fx-background-color: #F3F312 ;
+    -fx-border-width: 2;
+    -fx-border-style: groove;
+    -fx-border-color: black;
+}
+
+.label{
+    -fx-font-style: bold;
+}
