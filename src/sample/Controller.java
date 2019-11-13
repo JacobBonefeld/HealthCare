@@ -1,12 +1,12 @@
 package sample;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+import javafx.scene.image.ImageView;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class Controller {
 @FXML
@@ -27,7 +27,24 @@ public class Controller {
     ImageView thumbsUp;
 @FXML
     ImageView thumbsDown;
-
+@FXML
+    TextField heightInput;
+@FXML
+    TextField weightInput;
+@FXML
+    Label bmiOutput;
+@FXML
+    Label bmiTipOutput;
+@FXML
+    TableColumn weekNO;
+@FXML
+    TableColumn hoursExercised;
+@FXML
+    TableView <Statistics> tableView;
+@FXML
+    TableColumn<Statistics, String> colWeekNumber;
+@FXML
+    TableColumn<Statistics, String> colExerciseHours;
     /**
      * gets exercises from user input, and places them in database
      */
@@ -43,49 +60,19 @@ public class Controller {
      * Displays exercise history
      */
     public void displayExcercises(){
-        DB.selectSQL("SELECT fldRecordId FROM tblHealthRecord");
-        do{
-            String recordId = DB.getData();
-            if (recordId.equals(DB.NOMOREDATA)){
-                break;
-            }else{
-                System.out.println(recordId);
-                textAreaScrollPane.setText(recordId);
-            }
-        } while(true);
-
-        DB.selectSQL("SELECT fldWeek FROM tblHealthRecord");
-        do{
-            String week = DB.getData();
-            if (week.equals(DB.NOMOREDATA)){
-                break;
-            }else{
-                System.out.println(week);
-                textAreaScrollPane.setText(week);
-            }
-        } while(true);
-
-        DB.selectSQL("SELECT fldExercisedHours FROM tblHealthRecord");
-        do{
-            String exercisedHours = DB.getData();
-            if (exercisedHours.equals(DB.NOMOREDATA)){
-                break;
-            }else{
-                System.out.println(exercisedHours);
-                textAreaScrollPane.setText(exercisedHours);
-            }
-        } while(true);
-
+        handleStatistics statistics = new handleStatistics();
+        statistics.addStatistics(tableView,colWeekNumber,colExerciseHours);
     }
 
     /**
-     * displays average exerciseHours and state of thumbup/down
+     * displays average exerciseHours and state of thumbs up/down
      */
     public void displayAverageExerciseHours(){
    DB.selectSQL("SELECT AVG(fldExercisedHours) FROM tblHealthRecord");
-   String avg = DB.getData();
-    averageDisplay.setText(avg);
-    if (Double.parseDouble(avg)>3){
+   NumberFormat formatter = new DecimalFormat("#0.00");
+   double avg = Double.parseDouble(DB.getData());
+    averageDisplay.setText(formatter.format(avg));
+    if (avg>3){
         thumbsDown.setVisible(false);
         thumbsUp.setVisible(true);
     }
@@ -93,6 +80,41 @@ public class Controller {
         thumbsUp.setVisible(false);
         thumbsDown.setVisible(true);
     }
+    DB.pendingData=false;
     }
 
+    public void handleButtonBMI(){
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        Double bMI = calculateBMI(Double.parseDouble(heightInput.getText()),Double.parseDouble(weightInput.getText()));
+        bmiOutput.setText(formatter.format(bMI) + " BMI");
+        bmiTipOutput.setText(bMICategorization(bMI));
+    }
+
+    public static double calculateBMI(double height, double weight){
+        double bmi;
+        bmi =weight / Math.pow(height,2);
+        return bmi;
+    }
+
+    public static String bMICategorization(double bMI){
+        String categoryBmi ="";
+        if (bMI <15){
+            categoryBmi = "Very Severely underweight";
+        }else if (bMI >15 && bMI <=16 ){
+            categoryBmi = "Severely underweight";
+        }else if (bMI >16 && bMI <=18.5){
+            categoryBmi = "Underweight";
+        } else if (bMI >18.5 && bMI <= 25){
+            categoryBmi = "Normal";
+        } else if (bMI >25 && bMI <= 30){
+            categoryBmi = "Overweight";
+        } else if (bMI > 30 && bMI <=35){
+            categoryBmi = "Slightly Obese";
+        } else if (bMI > 35 && bMI <= 40){
+            categoryBmi = "Severely Obese";
+        } else {
+            categoryBmi = "Very Severely Obese";
+        }
+        return categoryBmi;
+    }
 }
