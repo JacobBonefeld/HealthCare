@@ -2,10 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -65,11 +65,6 @@
                            </font>
                         </Label>
                         <Label layoutX="29.0" layoutY="62.0" text="Hours of workout" textFill="WHITE" />
-                        <ScrollPane fx:id="scrollPane" layoutX="29.0" layoutY="106.0" prefHeight="312.0" prefWidth="536.0">
-                           <content>
-                              <TextArea fx:id="textAreaScrollPane" prefHeight="310.0" prefWidth="534.0" />
-                           </content>
-                        </ScrollPane>
                         <TextField fx:id="averageDisplay" layoutX="223.0" layoutY="441.0" prefHeight="70.0" prefWidth="116.0" />
                         <Label layoutX="142.0" layoutY="465.0" text="Average" textFill="WHITE" />
                         <ImageView fx:id="thumbsUp" fitHeight="71.0" fitWidth="105.0" layoutX="385.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -83,6 +78,12 @@
                            </image>
                         </ImageView>
                         <Button fx:id="queryDataButton" blendMode="LIGHTEN" layoutX="429.0" layoutY="5.0" mnemonicParsing="false" onAction="#displayExcercises" prefHeight="84.0" prefWidth="125.0" text="Query Data" />
+                        <TableView layoutX="14.0" layoutY="107.0" prefHeight="327.0" prefWidth="569.0">
+                          <columns>
+                            <TableColumn prefWidth="281.0" text="Week number" />
+                            <TableColumn prefWidth="287.0" text="Hours Exercised" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </content>
