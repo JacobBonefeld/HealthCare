@@ -14,7 +14,7 @@
 }
 
 .tab{
-    -fx-background-color: #85929E ;
+    -fx-background-color: #85929E;
     -fx-font-size:20;
     -fx-font-weight: bold;
     -fx-border-color: black;
@@ -31,8 +31,4 @@
     -fx-border-width: 2;
     -fx-border-style: groove;
     -fx-border-color: black;
-}
-
-.label{
-    -fx-font-style: bold;
 }
