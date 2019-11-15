@@ -49,39 +49,39 @@ public class Controller {
      * gets exercises from user input, and places them in database
      */
     public void getExcercises(){
-        int week =Integer.parseInt(weekNo.getText());
-        double hoursExercised = Double.parseDouble(hoursWorkedOut.getText());
-        DB.insertSQL("INSERT INTO tblHealthRecord (fldWeek, fldExercisedHours)VALUES("+week+","+hoursExercised+")");
-        displayExcercises();
-        displayAverageExerciseHours();
+        int week =Integer.parseInt(weekNo.getText()); // assigns week from GUI to variable
+        double hoursExercised = Double.parseDouble(hoursWorkedOut.getText()); // assigns exercisedhours from GUI to variable
+        DB.insertSQL("INSERT INTO tblHealthRecord (fldWeek, fldExercisedHours)VALUES("+week+","+hoursExercised+")"); // inserts week+exercise hours into DB
+        displayExcercises(); // update tables of exercise history
+        displayAverageExerciseHours(); // update display of performance
     }
 
     /**
      * Displays exercise history
      */
     public void displayExcercises(){
-        handleStatistics statistics = new handleStatistics();
-        statistics.addStatistics(tableView,colWeekNumber,colExerciseHours);
-        displayAverageExerciseHours();
+        handleStatistics statistics = new handleStatistics(); // creates / updates  tableview in GUI
+        statistics.addStatistics(tableView,colWeekNumber,colExerciseHours); // adds the statistics into cells
+        displayAverageExerciseHours(); // updates average performance
     }
 
     /**
      * displays average exerciseHours and state of thumbs up/down
      */
     public void displayAverageExerciseHours(){
-   DB.selectSQL("SELECT AVG(fldExercisedHours) FROM tblHealthRecord");
-   NumberFormat formatter = new DecimalFormat("#0.00");
-   double avg = Double.parseDouble(DB.getData());
-    averageDisplay.setText(formatter.format(avg));
+   DB.selectSQL("SELECT AVG(fldExercisedHours) FROM tblHealthRecord"); // selects Average of exercised hours from DB
+   NumberFormat formatter = new DecimalFormat("#0.00"); // numberformat for output of Average
+   double avg = Double.parseDouble(DB.getData()); // gets the avg into variable
+    averageDisplay.setText(formatter.format(avg)); // sets the avg into GUI
     if (avg>5){
-        thumbsDown.setVisible(false);
-        thumbsUp.setVisible(true);
+        thumbsDown.setVisible(false);// will hide bad performance "thumb"
+        thumbsUp.setVisible(true); // will show good performance "thumb"
     }
     else {
-        thumbsUp.setVisible(false);
-        thumbsDown.setVisible(true);
+        thumbsUp.setVisible(false); // will hide good performance "thumb"
+        thumbsDown.setVisible(true); // will show bad performance "thumb"
     }
-    DB.pendingData=false;
+    DB.pendingData=false; // resets DB.class pending data due to runtime error.
     }
 
     /**
