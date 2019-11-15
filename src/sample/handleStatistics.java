@@ -8,6 +8,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class handleStatistics {
 
+    /**
+     * sets the cell's / items in TableView
+     * @param tableView
+     * @param colWeekNumber
+     * @param colExerciseHours
+     */
     public void addStatistics(TableView<Statistics> tableView, TableColumn<Statistics, String> colWeekNumber, TableColumn<Statistics, String> colExerciseHours) {
         colWeekNumber.setCellValueFactory(new PropertyValueFactory<Statistics, String>("weekNumber"));
         colExerciseHours.setCellValueFactory(new PropertyValueFactory<Statistics, String>("exerciseHours"));
@@ -15,6 +21,10 @@ public class handleStatistics {
         tableView.setItems(getStatistics());
     }
 
+    /**
+     * adds values into the cells of TableView
+     * @return
+     */
     public  ObservableList<Statistics> getStatistics() {
         ObservableList<Statistics> statistics = FXCollections.observableArrayList();
         int recordId;
@@ -39,7 +49,6 @@ public class handleStatistics {
                 break;
             } else {
                 recordId ++;
-              // recordId = weekNumberString;
                 System.out.println(recordId);
             }
         }

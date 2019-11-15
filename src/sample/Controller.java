@@ -62,6 +62,7 @@ public class Controller {
     public void displayExcercises(){
         handleStatistics statistics = new handleStatistics();
         statistics.addStatistics(tableView,colWeekNumber,colExerciseHours);
+        displayAverageExerciseHours();
     }
 
     /**
@@ -72,7 +73,7 @@ public class Controller {
    NumberFormat formatter = new DecimalFormat("#0.00");
    double avg = Double.parseDouble(DB.getData());
     averageDisplay.setText(formatter.format(avg));
-    if (avg>3){
+    if (avg>5){
         thumbsDown.setVisible(false);
         thumbsUp.setVisible(true);
     }
@@ -83,6 +84,9 @@ public class Controller {
     DB.pendingData=false;
     }
 
+    /**
+     * gets values and displays the BMI
+     */
     public void handleButtonBMI(){
         NumberFormat formatter = new DecimalFormat("#0.00");
         Double bMI = calculateBMI(Double.parseDouble(heightInput.getText()),Double.parseDouble(weightInput.getText()));
@@ -90,12 +94,23 @@ public class Controller {
         bmiTipOutput.setText(bMICategorization(bMI));
     }
 
+    /**
+     * calculates the BMI
+     * @param height
+     * @param weight
+     * @return
+     */
     public static double calculateBMI(double height, double weight){
         double bmi;
         bmi =weight / Math.pow(height,2);
         return bmi;
     }
 
+    /**
+     * Handles the Categorization of BMI
+     * @param bMI
+     * @return
+     */
     public static String bMICategorization(double bMI){
         String categoryBmi ="";
         if (bMI <15){
